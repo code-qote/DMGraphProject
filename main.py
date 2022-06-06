@@ -1,5 +1,5 @@
-import pygame as pg
 import pygame_gui as pg_gui
+
 import objects
 from consts import *
 from graph import Graph
@@ -75,13 +75,13 @@ class Game:
                                                         manager=self.ui_manager)
         self.edge_type_drop_down = pg_gui.elements.UIDropDownMenu(options_list=["Неориентированный",
                                                                                 "Ориентированный"],
-                                                                      starting_option="Неориентированный",
-                                                                      relative_rect=pg.Rect((WIDTH - 220, y + 30),
-                                                                                            (200, 25)),
-                                                                      manager=self.ui_manager,
-                                                                      object_id=pg_gui.core.ObjectID(
-                                                                          object_id="#alg_drop_down",
-                                                                          class_id="@drop_down"))
+                                                                  starting_option="Неориентированный",
+                                                                  relative_rect=pg.Rect((WIDTH - 220, y + 30),
+                                                                                        (200, 25)),
+                                                                  manager=self.ui_manager,
+                                                                  object_id=pg_gui.core.ObjectID(
+                                                                      object_id="#alg_drop_down",
+                                                                      class_id="@drop_down"))
         self.add_edge_button = pg_gui.elements.UIButton(relative_rect=pg.Rect((WIDTH - 220, y + 60), (200, 25)),
                                                         text="Дуга",
                                                         manager=self.ui_manager)
@@ -89,17 +89,18 @@ class Game:
                                                       text="Удалить",
                                                       manager=self.ui_manager)
         self.clear_button = pg_gui.elements.UIButton(relative_rect=pg.Rect((WIDTH - 220, y + 120), (200, 25)),
-                                                      text="Очистить",
-                                                      manager=self.ui_manager)
-        self.algorithm_dropdown_menu = pg_gui.elements.UIDropDownMenu(options_list=["Эйлеров путь(цикл)", "Гамильтонов цикл",
-                                                                                    "Гамильтонов путь"],
-                                                                      starting_option="Эйлеров путь(цикл)",
-                                                                      relative_rect=pg.Rect((WIDTH - 220, y + 180),
-                                                                                            (200, 25)),
-                                                                      manager=self.ui_manager,
-                                                                      object_id=pg_gui.core.ObjectID(
-                                                                          object_id="#alg_drop_down",
-                                                                          class_id="@drop_down"))
+                                                     text="Очистить",
+                                                     manager=self.ui_manager)
+        self.algorithm_dropdown_menu = pg_gui.elements.UIDropDownMenu(
+            options_list=["Эйлеров путь(цикл)", "Гамильтонов цикл",
+                          "Гамильтонов путь"],
+            starting_option="Эйлеров путь(цикл)",
+            relative_rect=pg.Rect((WIDTH - 220, y + 180),
+                                  (200, 25)),
+            manager=self.ui_manager,
+            object_id=pg_gui.core.ObjectID(
+                object_id="#alg_drop_down",
+                class_id="@drop_down"))
         self.run_algorithm_button = pg_gui.elements.UIButton(relative_rect=pg.Rect((WIDTH - 220, y + 210), (200, 25)),
                                                              text="Запустить алгоритм",
                                                              manager=self.ui_manager)

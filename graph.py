@@ -88,7 +88,7 @@ class Graph:
         if not self.graph:
             green_nodes = list(self.nodes)
             states = [{"yellow_nodes": set(), "red_nodes": set(),
-                           "red_edges": set(), "green_nodes": green_nodes, "green_edges": set()}]
+                       "red_edges": set(), "green_nodes": green_nodes, "green_edges": set()}]
             return states
 
         start = list(self.graph.keys())[0]
@@ -125,9 +125,9 @@ class Graph:
                         green_edges.append((res[-1], p))
                     res.append(p)
             state = {"yellow_nodes": yellow_nodes.copy(), "red_nodes": red_nodes.copy(),
-                           "red_edges": red_edges.copy(),
-                           "green_nodes": list(reversed(res.copy())),
-                           "green_edges": green_edges.copy()}
+                     "red_edges": red_edges.copy(),
+                     "green_nodes": list(reversed(res.copy())),
+                     "green_edges": green_edges.copy()}
             if states[-1] != state:
                 states.append(state)
 

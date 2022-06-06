@@ -1,0 +1,2 @@
+pygame-gui==0.6.4
+pygame==2.1.2
