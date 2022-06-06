@@ -1,6 +1,6 @@
 # DMGraphProject
 Graph Project for Discrete Math
-![Uploading Снимок экрана 2022-06-04 в 17.13.19.png…](<img width="1392" alt="Снимок экрана 2022-06-04 в 17 13 22" src="https://user-images.githubusercontent.com/49525233/172248324-07c68d14-e5a7-4638-b745-75bd058d975f.png">
+<img width="1392" alt="Снимок экрана 2022-06-04 в 17 13 22" src="https://user-images.githubusercontent.com/49525233/172248324-07c68d14-e5a7-4638-b745-75bd058d975f.png">
 <img width="1392" alt="Снимок экрана 2022-06-04 в 17 13 29" src="https://user-images.githubusercontent.com/49525233/172248327-09a81378-6386-4092-8fda-ce9c5e37f674.png">
 <img width="1392" alt="Снимок экрана 2022-06-04 в 17 13 33" src="https://user-images.githubusercontent.com/49525233/172248335-805b6acc-a7d6-422c-b42e-c9c0397506cd.png">
 <img width="1392" alt="Снимок экрана 2022-06-04 в 17 13 45" src="https://user-images.githubusercontent.com/49525233/172248341-89e0a5db-eafe-4afc-b21f-de6407d6ecc9.png">
@@ -17,4 +17,4 @@ Graph Project for Discrete Math
 <img width="1392" alt="Снимок экрана 2022-06-04 в 17 24 55" src="https://user-images.githubusercontent.com/49525233/172248381-66c0f6f2-b4bd-409d-be41-9e8191f30268.png">
 <img width="1392" alt="Снимок экрана 2022-06-04 в 17 24 59" src="https://user-images.githubusercontent.com/49525233/172248386-e9ea7873-d929-4b81-b9eb-087fc0bb6210.png">
 <img width="1392" alt="Снимок экрана 2022-06-04 в 17 25 01" src="https://user-images.githubusercontent.com/49525233/172248388-d19eda5f-c96c-4066-a581-e7810620faf4.png">
-)
+
