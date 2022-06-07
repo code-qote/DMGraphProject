@@ -1,4 +1,5 @@
 import math
+import pygame_gui as pg_gui
 
 from consts import *
 
@@ -88,7 +89,10 @@ class Node(Basic):
             self.neighbours.remove(node)
             self.edges.pop(node)
 
-    def update(self):
+    def update(self, x=None, y=None):
+        if x and y:
+            self.rect.x, self.rect.y = x - self.WIDTH // 2, y - self.HEIGHT // 2
+            self.pos = pg.math.Vector2(self.rect.x, self.rect.y)
         self.image = self._render_image()
         font_optima = pg.font.SysFont("arial", 36)
         color = pg.Color("#658EA9")

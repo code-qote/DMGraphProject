@@ -27,11 +27,13 @@ def mex(a: list):
 
 class Game:
     ADD_NODE_MOD = 1
+    MOVE_NODE_MOD = 5
     ADD_EDGE_MOD = 2
     ADD_DIRECTED_EDGE_MOD = 3
     REMOVE_MOD = 4
 
-    MODES = {ADD_NODE_MOD: "Добавить вершину", ADD_EDGE_MOD: "Добавить дугу", REMOVE_MOD: "Удалить"}
+    MODES = {ADD_NODE_MOD: "Добавить вершину", ADD_EDGE_MOD: "Добавить дугу", REMOVE_MOD: "Удалить",
+             MOVE_NODE_MOD: "Переместить вершину"}
 
     def __init__(self):
         self.edges_group = None
@@ -54,6 +56,9 @@ class Game:
         self.ui_manager = pg_gui.UIManager((WIDTH, HEIGHT), theme_path="theme.json")
         self.directed = False
 
+        self.moving_node_start_position = ()
+        self.moving_node = None
+
         self.load_settings()
 
     def load_settings(self):
@@ -73,22 +78,25 @@ class Game:
         self.add_node_button = pg_gui.elements.UIButton(relative_rect=pg.Rect((WIDTH - 220, y), (200, 25)),
                                                         text="Вершина",
                                                         manager=self.ui_manager)
+        self.move_node_button = pg_gui.elements.UIButton(relative_rect=pg.Rect((WIDTH - 220, y + 30), (200, 25)),
+                                                        text="Переместить вершину",
+                                                        manager=self.ui_manager)
         self.edge_type_drop_down = pg_gui.elements.UIDropDownMenu(options_list=["Неориентированный",
                                                                                 "Ориентированный"],
                                                                   starting_option="Неориентированный",
-                                                                  relative_rect=pg.Rect((WIDTH - 220, y + 30),
+                                                                  relative_rect=pg.Rect((WIDTH - 220, y + 60),
                                                                                         (200, 25)),
                                                                   manager=self.ui_manager,
                                                                   object_id=pg_gui.core.ObjectID(
                                                                       object_id="#alg_drop_down",
                                                                       class_id="@drop_down"))
-        self.add_edge_button = pg_gui.elements.UIButton(relative_rect=pg.Rect((WIDTH - 220, y + 60), (200, 25)),
+        self.add_edge_button = pg_gui.elements.UIButton(relative_rect=pg.Rect((WIDTH - 220, y + 90), (200, 25)),
                                                         text="Дуга",
                                                         manager=self.ui_manager)
-        self.remove_button = pg_gui.elements.UIButton(relative_rect=pg.Rect((WIDTH - 220, y + 90), (200, 25)),
+        self.remove_button = pg_gui.elements.UIButton(relative_rect=pg.Rect((WIDTH - 220, y + 120), (200, 25)),
                                                       text="Удалить",
                                                       manager=self.ui_manager)
-        self.clear_button = pg_gui.elements.UIButton(relative_rect=pg.Rect((WIDTH - 220, y + 120), (200, 25)),
+        self.clear_button = pg_gui.elements.UIButton(relative_rect=pg.Rect((WIDTH - 220, y + 150), (200, 25)),
                                                      text="Очистить",
                                                      manager=self.ui_manager)
         self.algorithm_dropdown_menu = pg_gui.elements.UIDropDownMenu(
@@ -113,6 +121,8 @@ class Game:
             if event.type == pg_gui.UI_BUTTON_PRESSED:
                 if event.ui_element == self.add_node_button:
                     self.set_mode(self.ADD_NODE_MOD)
+                elif event.ui_element == self.move_node_button:
+                    self.set_mode(self.MOVE_NODE_MOD)
                 elif event.ui_element == self.add_edge_button:
                     self.set_mode(self.ADD_EDGE_MOD)
                 elif event.ui_element == self.remove_button:
@@ -135,8 +145,22 @@ class Game:
 
             if event.type == pg.QUIT:
                 self.running = False
+            elif event.type == pg.MOUSEBUTTONDOWN and event.button == LMB and self.mode == self.MOVE_NODE_MOD:
+                colliders = list(
+                    filter(lambda obj: obj.rect.collidepoint(pg.mouse.get_pos()), self.nodes_group))
+                if colliders:
+                    self.moving_node = colliders[0]
+                    x, y = self.moving_node.pos
+                    x += self.moving_node.WIDTH // 2
+                    y += self.moving_node.HEIGHT // 2
+                    self.moving_node_start_position = (x, y)
             elif event.type == pg.MOUSEBUTTONUP:
                 x, y = pg.mouse.get_pos()
+                if self.mode == self.MOVE_NODE_MOD and x < WIDTH - 220:
+                    self.moving_node = None
+                elif self.mode == self.MOVE_NODE_MOD and x >= WIDTH - 220:
+                    self.moving_node.update(*self.moving_node_start_position)
+                    self.moving_node = None
                 if x < WIDTH - 220:  # чтобы нельзя было поставить вершину рядом с кнопками
                     if event.button == LMB:
                         v = pg.Vector2(x, y)
@@ -167,6 +191,8 @@ class Game:
                     self.set_mode(self.ADD_EDGE_MOD)
                 elif event.key == pg.K_3:
                     self.set_mode(self.REMOVE_MOD)
+                elif event.key == pg.K_m:
+                    self.set_mode(self.MOVE_NODE_MOD)
                 elif event.key == pg.K_RETURN:
                     self.run_algorithm()
                 elif event.key == pg.K_ESCAPE:
@@ -284,7 +310,7 @@ class Game:
         self.objects_group.add(node)
         self.nodes_group.add(node)
 
-    def select_node(self, node):
+    def select_node(self, node: objects.Node):
         node.select()
         self.selected_nodes.append(node)
 
@@ -305,6 +331,9 @@ class Game:
 
         for obj in self.objects_group:
             obj.update()
+
+        if self.mode == self.MOVE_NODE_MOD and self.moving_node:
+            self.moving_node.update(*pg.mouse.get_pos())
 
         if len(self.selected_nodes) == 2:  # набралось 2 выбранные вершины
             node1, node2 = self.selected_nodes
