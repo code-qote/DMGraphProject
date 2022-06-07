@@ -1,4 +1,4 @@
-# DMGraphProject
+# Discrete Math Graph Project
 Graph Project for Discrete Math
 <img width="1392" alt="Снимок экрана 2022-06-04 в 17 13 22" src="https://user-images.githubusercontent.com/49525233/172248324-07c68d14-e5a7-4638-b745-75bd058d975f.png">
 <img width="1392" alt="Снимок экрана 2022-06-04 в 17 13 29" src="https://user-images.githubusercontent.com/49525233/172248327-09a81378-6386-4092-8fda-ce9c5e37f674.png">
