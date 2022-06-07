@@ -2,7 +2,8 @@
 Graph Project for Discrete Math
 
 Installation:
-> git clone https://github.com/code-qote/DMGraphProject.git\n
+> git clone https://github.com/code-qote/DMGraphProject.git
+
 > python -m pip install requirements.txt
 
 Examples:
